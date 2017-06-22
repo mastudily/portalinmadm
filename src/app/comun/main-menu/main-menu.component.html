@@ -1,0 +1,12 @@
+<div id="main-menu">
+  <div class="main-menu-container">
+    <div class="menu-content" *ngIf="routes && routes.length">
+      <div class="section"
+           *ngFor="let route of routes"
+           [routerLinkActive]="['active']"
+           [routerLinkActiveOptions]="{exact: true}">
+        <a *ngIf="route.data[0] != ''" [routerLink]="[route.path]"><h3>{{route.data[0]}}</h3></a>
+      </div>
+    </div>
+  </div>
+</div>

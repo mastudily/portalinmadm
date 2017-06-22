@@ -1,0 +1,31 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()" >&times;</button>
+      <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+          <form [formGroup]="provestadoForm" (ngSubmit)="onSubmit()">
+            <div style="width: 100%">
+              <label for="paisNombre">Pais</label>
+              <input type="text" id="paisNombre" class="form-control"
+                value="{{paisNombre}}" disabled>
+            </div>
+            <div style="width: 100%">
+              <label for="provEstadoNombre">Nombre</label>
+              <input type="text" id="provEstadoNombre" class="form-control"
+                formControlName="provEstadoNombre" required >
+            </div>
+            <div *ngIf="formErrors.provEstadoNombre" class="alert alert-danger">
+              {{ formErrors.provEstadoNombre }}
+            </div>
+          </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" [disabled]="!provestadoForm.valid" (click)="onSubmit()">Aceptar</button>
+      <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()" >&times;</button>
+      <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <form [formGroup]="cantonciudadForm" (ngSubmit)="onSubmit()">
+          <div style="width: 100%">
+            <label for="paisNombre">Pais</label>
+            <input type="text" id="paisNombre" class="form-control"
+                   value="{{paisNombre}}" disabled>
+          </div>
+          <div style="width: 100%">
+            <label for="provEstadoNombre">Provincia/Estado</label>
+            <input type="text" id="provEstadoNombre" class="form-control"
+                   value="{{provEstadoNombre}}" disabled>
+          </div>
+          <div style="width: 100%">
+            <label for="cantonCiudadNombre">Canton/Ciudad</label>
+            <input type="text" id="cantonCiudadNombre" class="form-control"
+                   formControlName="cantonCiudadNombre" required >
+          </div>
+          <div *ngIf="formErrors.cantonCiudadNombre" class="alert alert-danger">
+            {{ formErrors.cantonCiudadNombre }}
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" [disabled]="!cantonciudadForm.valid" (click)="onSubmit()">Aceptar</button>
+      <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+    </div>
+  </div>
+</div>

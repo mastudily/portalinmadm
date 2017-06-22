@@ -1,0 +1,55 @@
+<div class="content-header">
+    <h2>Caracteristicas</h2>
+  <div *ngIf="okRegistro" class="alert alert-success">
+    {{ mensajeOk }}
+  </div>
+  <div *ngIf="errorRegistro" class="alert alert-danger">
+    {{ mensajeError }}
+  </div>
+</div>
+<div id="content" class="content-box">
+  <table class="table table-striped" [mfData]="data | dataFilterCaracteristica : filterQuery" #mf="mfDataTable"
+         [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+    <thead>
+    <tr>
+      <td colspan="5">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 5%"></th>
+      <th style="width: 40%">
+        <mfDefaultSorter by="caracteristicaNombre">Descripcion</mfDefaultSorter>
+      </th>
+      <th style="width: 15%">
+        <mfDefaultSorter by="caracteristicaTipoValor">Tipo valor</mfDefaultSorter>
+      </th>
+    </tr>
+    <tr>
+      <th style="width: 5%"></th>
+      <th style="width: 40%">
+        <input class="form-control" [(ngModel)]="filterQuery"/>
+      </th>
+      <th style="width: 15%"></th>
+      <th style="width: 15%">
+        <button (click)="onCrearCaracteristica()" class="btn btn-primary" type="submit">Nuevo</button>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of mf.data">
+      <td>
+        <button (click)="remove(item)" class="btn btn-danger">x</button>
+      </td>
+      <td><a (click)="onSelect(item)" style="cursor:pointer">{{item.caracteristicaNombre}}</a></td>
+      <td>
+        <select [(ngModel)]="item.caracteristicaTipoValor" disabled="true">
+          <option *ngFor="let tipov of tipovalor" [value]="tipov.constanteTipo">{{tipov.constanteValorC}}</option>
+        </select>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

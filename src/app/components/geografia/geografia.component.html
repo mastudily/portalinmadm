@@ -1,0 +1,20 @@
+<div class="container">
+      <div class="panel-group">
+          <div class="panel-body" style="background-color: #ededed; margin-top: 20px;">
+            <md-tab-group (selectedIndexChange)="selectedGeoTabChange($event)" [selectedIndex]="selectedGeoTab">
+              <md-tab label="Paises">
+                <app-pais (onProvestado)="onProvestado($event)"></app-pais>
+              </md-tab>
+              <md-tab label="Provincia/Estado" [disabled]="!tabHabilitado[1]">
+                <app-provestado (onCantonciudad)="onCantonciudad($event)" [paisNombre]="paisNombre"></app-provestado>
+              </md-tab>
+              <md-tab label="Canton/Ciudad" [disabled]="!tabHabilitado[2]">
+                <app-cantonciudad (onParroquiazona)="onParroquiazona($event)" [paisNombre]="paisNombre" [provEstadoNombre]="provEstadoNombre"></app-cantonciudad>
+              </md-tab>
+              <md-tab label="Parroquia/Zona" [disabled]="!tabHabilitado[3]">
+                <app-parroquiazona [paisNombre]="paisNombre" [provEstadoNombre]="provEstadoNombre" [cantonCiudadNombre]="cantonCiudadNombre"></app-parroquiazona>
+              </md-tab>
+            </md-tab-group>
+        </div>
+    </div>
+</div>

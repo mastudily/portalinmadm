@@ -1,0 +1,61 @@
+<div class="content-header">
+  <h2>Inmuebles</h2>
+  <div *ngIf="okRegistro" class="alert alert-success">
+    {{ mensajeOk }}
+  </div>
+  <div *ngIf="errorRegistro" class="alert alert-danger">
+    {{ mensajeError }}
+  </div>
+</div>
+<div id="content" class="content-box">
+  <table class="table table-striped" [mfData]="data | dataFilterInmueble : filterQuery" #mf="mfDataTable"
+         [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+    <thead>
+    <tr>
+      <td colspan="5">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 5%"></th>
+      <th style="width: 40%">
+        <mfDefaultSorter by="inmuebleDescripcion">Descripcion</mfDefaultSorter>
+      </th>
+      <th style="width: 25%">Tipo de inmueble</th>
+      <th style="width: 25%">Tipo de negocio</th>
+    </tr>
+    <tr>
+      <th style="width: 5%"></th>
+      <th style="width: 40%">
+        <input class="form-control" [(ngModel)]="filterQuery"/>
+      </th>
+      <th style="width: 25%"></th>
+      <th style="width: 25%">
+        <button (click)="onCrearInmueble()" class="btn btn-primary" type="submit">Nuevo</button>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of mf.data">
+      <td>
+        <button (click)="remove(item)" class="btn btn-danger">x</button>
+      </td>
+      <td>
+        <a (click)="onSelect(item)" style="cursor:pointer">{{item.inmuebleDescripcion}}</a>
+      </td>
+      <td>
+        <select [(ngModel)]="item.tipoInmuebleInmuebleId" disabled="true">
+          <option *ngFor="let tipinm of tipoinmueble" [value]="tipinm.tipoInmuebleId">{{tipinm.tipoInmuebleNombre}}</option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="item.tipoNegocioInmuebleId" disabled="true">
+          <option *ngFor="let tipneg of tiponegocio" [value]="tipneg.tipoNegocioId">{{tipneg.tipoNegocioNombre}}</option>
+        </select>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

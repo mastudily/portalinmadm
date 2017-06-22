@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Caracteristicas</h2>
+    <form [formGroup]="caracteristicaForm" (ngSubmit)="onSubmit()">
+      <div style="width: 100%">
+        <label for="caracteristicaNombre">Nombre</label>
+        <input type="text" id="caracteristicaNombre" class="form-control"
+           formControlName="caracteristicaNombre" required >
+      </div>
+      <div *ngIf="formErrors.caracteristicaNombre" class="alert alert-danger">
+        {{ formErrors.caracteristicaNombre }}
+      </div>
+      <div style="width: 50%">
+        <label for="caracteristicaTipoValor">Tipo de valor</label>
+        <select [(ngModel)]="caracteristicaTipoValor" id="caracteristicaTipoValor" class="form-control"
+                formControlName="caracteristicaTipoValor">
+          <option *ngFor="let tipov of tipovalor" [value]="tipov.constanteTipo">{{tipov.constanteValorC}}</option>
+        </select>
+      </div>
+      <div *ngIf="formErrors.caracteristicaTipoValor" class="alert alert-danger">
+        {{ formErrors.caracteristicaTipoValor }}
+      </div>
+      <br/><br/>
+      <button class="btn btn-primary" [disabled]="!caracteristicaForm.valid" type="submit">Aceptar</button>
+      <button class="btn btn-secondary" routerLink="/caracteristica">Cancelar</button>
+    </form>
+</div>

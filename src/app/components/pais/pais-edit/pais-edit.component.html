@@ -1,0 +1,26 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()" >&times;</button>
+      <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <form [formGroup]="paisForm" (ngSubmit)="onSubmit()">
+          <div style="width: 100%">
+            <label for="paisNombre">Nombre</label>
+              <input type="text" id="paisNombre" class="form-control"
+              formControlName="paisNombre" required >
+          </div>
+          <div *ngIf="formErrors.paisNombre" class="alert alert-danger">
+              {{ formErrors.paisNombre }}
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" [disabled]="!paisForm.valid" (click)="onSubmit()">Aceptar</button>
+      <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+    </div>
+  </div>
+</div>

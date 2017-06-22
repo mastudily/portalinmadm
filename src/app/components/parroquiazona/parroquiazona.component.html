@@ -1,0 +1,49 @@
+<div class="content-header">
+  <h3>{{paisNombre}}/{{provEstadoNombre}}/{{cantonCiudadNombre}}</h3>
+  <div *ngIf="okRegistro" class="alert alert-success">
+    {{ mensajeOk }}
+  </div>
+  <div *ngIf="errorRegistro" class="alert alert-danger">
+    {{ mensajeError }}
+  </div>
+</div>
+<div id="content" class="content-box">
+  <table class="table table-striped" [mfData]="data | dataFilterParroquiazona : filterQuery" #mf="mfDataTable"
+         [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+    <thead>
+    <tr>
+      <td colspan="5">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 5%"></th>
+      <th style="width: 60%">
+        <mfDefaultSorter by="parroquiaZonaNombre">Nombre</mfDefaultSorter>
+      </th>
+      <th style="width: 25%"></th>
+    </tr>
+    <tr>
+      <th style="width: 5%"></th>
+      <th style="width: 60%">
+        <input class="form-control" [(ngModel)]="filterQuery"/>
+      </th>
+      <th style="width: 25%">
+        <button (click)="onCrearParroquiazona()" class="btn btn-primary" type="submit">Nuevo</button>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of mf.data">
+      <td>
+        <button (click)="remove(item)" class="btn btn-danger">x</button>
+      </td>
+      <td>
+        <a (click)="onSelect(item)" style="cursor:pointer">{{item.parroquiaZonaNombre}}</a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

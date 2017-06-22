@@ -1,0 +1,26 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()" >&times;</button>
+      <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <form [formGroup]="tiponegocioForm" (ngSubmit)="onSubmit()">
+          <div style="width: 100%">
+            <label for="tipoNegocioNombre">Nombre</label>
+            <input type="text" id="tipoNegocioNombre" class="form-control"
+                   formControlName="tipoNegocioNombre" required >
+          </div>
+          <div *ngIf="formErrors.tipoNegocioNombre" class="alert alert-danger">
+            {{ formErrors.tipoNegocioNombre }}
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" [disabled]="!tiponegocioForm.valid" (click)="onSubmit()">Aceptar</button>
+      <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+    </div>
+  </div>
+</div>

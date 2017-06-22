@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="close()" >&times;</button>
+      <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <form [formGroup]="parroquiazonaForm" (ngSubmit)="onSubmit()">
+          <div style="width: 100%">
+            <label for="paisNombre">Pais</label>
+            <input type="text" id="paisNombre" class="form-control"
+                   value="{{paisNombre}}" disabled>
+          </div>
+          <div style="width: 100%">
+            <label for="provEstadoNombre">Provincia/Estado</label>
+            <input type="text" id="provEstadoNombre" class="form-control"
+                   value="{{provEstadoNombre}}" disabled>
+          </div>
+          <div style="width: 100%">
+            <label for="cantonCiudadNombre">Canton/Ciudad</label>
+            <input type="text" id="cantonCiudadNombre" class="form-control"
+                   value="{{cantonCiudadNombre}}" disabled>
+          </div>
+          <div style="width: 100%">
+            <label for="parroquiaZonaNombre">Parroquia/Zona</label>
+            <input type="text" id="parroquiaZonaNombre" class="form-control"
+                   formControlName="parroquiaZonaNombre" required >
+          </div>
+          <div *ngIf="formErrors.parroquiaZonaNombre" class="alert alert-danger">
+            {{ formErrors.parroquiaZonaNombre }}
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" [disabled]="!parroquiazonaForm.valid" (click)="onSubmit()">Aceptar</button>
+      <button class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+    </div>
+  </div>
+</div>

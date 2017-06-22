@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>Inmuebles</h2>
+  <form [formGroup]="inmuebleForm" (ngSubmit)="onSubmit()">
+    <div style="width: 100%">
+      <label for="inmuebleDescripcion">Descripcion</label>
+      <input type="text" id="inmuebleDescripcion" class="form-control"
+             formControlName="inmuebleDescripcion" required >
+    </div>
+    <div *ngIf="formErrors.inmuebleDescripcion" class="alert alert-danger">
+      {{ formErrors.inmuebleDescripcion }}
+    </div>
+    <div style="width: 50%">
+      <label for="paisInmuebleId">Pais</label>
+      <select [(ngModel)]="paisInmuebleId" id="paisInmuebleId" class="form-control"
+              formControlName="paisInmuebleId" (change)="provEstado()">
+        <option *ngFor="let pais of paisinmueble" [value]="pais.paisId">{{pais.paisNombre}}</option>
+      </select>
+    </div>
+    <div style="width: 50%">
+      <label for="provEstadoInmuebleId">Provincia/Estado</label>
+      <select [(ngModel)]="provEstadoInmuebleId" id="provEstadoInmuebleId" class="form-control"
+              formControlName="provEstadoInmuebleId" (change)="cantonCiudad()">
+        <option *ngFor="let provestado of provestadoinmueble" [value]="provestado.provestadoPK.provEstadoId">{{provestado.provEstadoNombre}}</option>
+      </select>
+    </div>
+    <div style="width: 50%">
+      <label for="cantonCiudadInmuebleId">Canton/Ciudad</label>
+      <select [(ngModel)]="cantonCiudadInmuebleId" id="cantonCiudadInmuebleId" class="form-control"
+              formControlName="cantonCiudadInmuebleId" (change)="parroquiaZona()">
+        <option *ngFor="let cantonciudad of cantonciudadinmueble" [value]="cantonciudad.cantonciudadPK.cantonCiudadId">{{cantonciudad.cantonCiudadNombre}}</option>
+      </select>
+    </div>
+    <div style="width: 50%">
+      <label for="parroquiaZonaInmuebleId">Parroquia/Zona</label>
+      <select [(ngModel)]="parroquiaZonaId" id="parroquiaZonaInmuebleId" class="form-control"
+              formControlName="parroquiaZonaInmuebleId">
+        <option *ngFor="let parroquiazona of parroquiazonainmueble" [value]="parroquiazona.parroquiazonaPK.parroquiaZonaId">{{parroquiazona.parroquiaZonaNombre}}</option>
+      </select>
+    </div>
+    <div style="width: 100%">
+      <label for="inmuebleDireccion">Direccion</label>
+      <input type="text" id="inmuebleDireccion" class="form-control"
+             formControlName="inmuebleDireccion" required >
+    </div>
+    <div *ngIf="formErrors.inmuebleDireccion" class="alert alert-danger">
+      {{ formErrors.inmuebleDireccion }}
+    </div>
+    <div style="width: 50%">
+      <label for="tipoInmuebleInmuebleId">Tipo de inmueble</label>
+      <select [(ngModel)]="tipoInmuebleInmuebleId" id="tipoInmuebleInmuebleId" class="form-control"
+              formControlName="tipoInmuebleInmuebleId">
+        <option *ngFor="let tipinm of tipoinmueble" [value]="tipinm.tipoInmuebleId">{{tipinm.tipoInmuebleNombre}}</option>
+      </select>
+    </div>
+    <div style="width: 50%">
+      <label for="tipoNegocioInmuebleId">Tipo de negocio</label>
+      <select [(ngModel)]="tipoNegocioInmuebleId" id="tipoNegocioInmuebleId" class="form-control"
+              formControlName="tipoNegocioInmuebleId">
+        <option *ngFor="let tipneg of tiponegocio" [value]="tipneg.tipoNegocioId">{{tipneg.tipoNegocioNombre}}</option>
+      </select>
+    </div>
+    <div style="width: 50%">
+      <label for="inmuebleZona">Zona</label>
+      <select [(ngModel)]="inmuebleZona" id="inmuebleZona" class="form-control"
+              formControlName="inmuebleZona">
+        <option *ngFor="let zoninm of zonainmueble" [value]="zoninm.constanteTipo">{{zoninm.constanteValorC}}</option>
+      </select>
+    </div>
+    <div style="width: 100%">
+      <label for="inmuebleObservaciones">Observaciones</label>
+      <textarea rows="5" id="inmuebleObservaciones" class="form-control"
+                formControlName="inmuebleObservaciones" required ></textarea>
+    </div>
+    <div style="width: 50%">
+      <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" site_key="6LcMNiUUAAAAALkdJ-4tv6-4cvOQMGsT5JNjeAZl"></re-captcha>
+    </div>
+    <button class="btn btn-primary" [disabled]="!inmuebleForm.valid || !recaptchavalid" type="submit">Aceptar</button>
+    <button class="btn btn-secondary" routerLink="/inmueble">Cancelar</button>
+  </form>
+</div>
